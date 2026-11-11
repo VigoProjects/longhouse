@@ -11,7 +11,7 @@ export const business = () => ({
   name: site.name,
   description: site.tagline,
   url: base,
-  logo: `${base}/assets/logo.png`,
+  logo: `${base}/assets/logo-green.png`,
   email: site.email,
   telephone: telHref.replace("tel:", ""),
   address: {

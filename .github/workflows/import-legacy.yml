@@ -5,12 +5,10 @@
 # Safe to delete this workflow and legacy/ once the new site is live.
 name: Import legacy site
 
+# Manual only (Actions tab → Import legacy site → Run workflow). Note: re-running re-downloads the
+# original PNG/JPEGs listed in scripts/legacy-assets.txt into public/assets.
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/import-legacy.yml"
-      - "scripts/legacy-assets.txt"
 
 permissions:
   contents: write
@@ -36,7 +34,7 @@ jobs:
           done
           # Squarespace lazy-loads images via data-src, which wget doesn't follow: grab every one at full size
           mkdir -p images
-          grep -rhoE 'https://images\.squarespace-cdn\.com/content/[^"'"'"' )?]+' . | sort -u > ../image-urls.txt || true
+          grep -rhoE 'https://images\.squarespace-cdn\.com/content/[^"'"'"' )?&]+' . | sort -u > ../image-urls.txt || true
           while read -r u; do
             f="images/$(basename "$u" | sed 's/%[0-9A-Fa-f][0-9A-Fa-f]/_/g; s/+/_/g')"
             [ -f "$f" ] || curl -sfL -A "$UA" "${u}?format=2500w" -o "$f" || true

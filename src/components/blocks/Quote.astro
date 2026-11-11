@@ -3,8 +3,8 @@ const { id, background = "moss", quote, name, context } = Astro.props;
 ---
 <section id={id} class:list={[`tone-${background}`, "section"]}>
   <figure class="container-page max-w-4xl text-center">
-    <span aria-hidden="true" class="block font-serif text-7xl leading-none text-oak-light">“</span>
-    <blockquote class="mt-2 font-serif text-3xl leading-snug italic lg:text-[2.6rem] lg:leading-tight text-balance">{quote}</blockquote>
+    <span aria-hidden="true" class="block font-serif text-7xl leading-none text-olive">“</span>
+    <blockquote class="mt-2 font-serif text-3xl leading-snug lg:text-[2.6rem] lg:leading-tight text-balance">{quote}</blockquote>
     <figcaption class="mt-8 text-sm tracking-wide">
       <span class="font-semibold">{name}</span>{context && <span class="opacity-70"> — {context}</span>}
     </figcaption>

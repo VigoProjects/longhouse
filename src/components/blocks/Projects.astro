@@ -33,7 +33,7 @@ const H = isPageTitle ? "h1" : "h2";
               </div>
               <div class="mt-4 flex items-baseline justify-between gap-4">
                 <h3 class="text-xl lg:text-2xl">{p.data.title}</h3>
-                {p.data.tags[0] && <span class="shrink-0 text-xs font-semibold uppercase tracking-wider text-oak">{p.data.tags[0]}</span>}
+                {p.data.tags[0] && <span class="shrink-0 text-xs font-semibold uppercase tracking-wider text-olive-dark">{p.data.tags[0]}</span>}
               </div>
               {(p.data.summary || p.data.location) && <p class="mt-1 text-sm text-muted">{[p.data.location, p.data.summary].filter(Boolean).join(" · ")}</p>}
             </Tag>

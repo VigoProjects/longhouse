@@ -1,51 +1,51 @@
-/* Design tokens for Longhouse Builders.
-   Colours and fonts are a first pass — match them to the logo/brand once the
-   legacy import (legacy/) has pulled the Squarespace stylesheet. Change them here only. */
+/* Design tokens for Longhouse Builders. Change colours and fonts here only.
+   Brand: deep green #0a2c27 and olive #aeac4f from the Longhouse logo; Ovo + Almarai
+   as on the original Squarespace site. */
 @import "tailwindcss";
-@import "@fontsource-variable/newsreader";
-@import "@fontsource-variable/newsreader/wght-italic.css";
-@import "@fontsource-variable/public-sans";
+@import "@fontsource/ovo/400.css";
+@import "@fontsource/almarai/400.css";
+@import "@fontsource/almarai/700.css";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-serif: "Newsreader Variable", Georgia, serif;
-  --font-sans: "Public Sans Variable", system-ui, sans-serif;
+  --font-serif: "Ovo", Georgia, serif;
+  --font-sans: "Almarai", system-ui, sans-serif;
 
-  /* Deep moss green — taken from the dark green of the Longhouse logo */
-  --color-moss-950: #17241c;
-  --color-moss-900: #1f3127;
-  --color-moss-800: #2a4234;
-  --color-moss-600: #4a6a55;
-  --color-moss-300: #a9bba9;
-  /* Gritstone and limestone neutrals */
+  /* Longhouse green (logo background) */
+  --color-moss-950: #082520;
+  --color-moss-900: #0a2c27;
+  --color-moss-800: #12403a;
+  --color-moss-600: #3b5f58;
+  --color-moss-300: #9fb3ad;
+  /* Warm stone neutrals */
   --color-paper: #f7f4ee;
   --color-stone-100: #efe9df;
   --color-stone-200: #e4dccd;
   --color-stone-400: #b9ad97;
   --color-ink: #1c1d1a;
   --color-muted: #5b5850;
-  /* Weathered oak / ochre accent */
-  --color-oak: #9a6a35;
-  --color-oak-light: #c89a5f;
+  /* Logo olive: `olive` on dark backgrounds, `olive-dark` for text on light ones (passes WCAG AA) */
+  --color-olive: #aeac4f;
+  --color-olive-dark: #5f5e27;
 }
 
 @layer base {
   html { scroll-behavior: smooth; }
   body { @apply bg-paper text-ink font-sans antialiased; font-size: 1.0625rem; line-height: 1.65; }
-  h1, h2, h3, h4 { @apply font-serif text-balance; font-weight: 420; letter-spacing: -0.01em; line-height: 1.08; }
-  ::selection { @apply bg-oak-light/40; }
-  :focus-visible { @apply outline-2 outline-offset-2 outline-oak; }
+  h1, h2, h3, h4 { @apply font-serif text-balance; font-weight: 400; letter-spacing: -0.005em; line-height: 1.12; }
+  ::selection { @apply bg-olive/40; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-olive-dark; }
 }
 
 @utility container-page { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12; }
-@utility eyebrow { @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-oak; }
+@utility eyebrow { @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-olive-dark; }
 @utility section { @apply py-20 lg:py-28; }
 
 /* Section tones (block `background:` field) */
 .tone-paper { @apply bg-paper; }
 .tone-stone { @apply bg-stone-100; }
 .tone-moss { @apply bg-moss-900 text-paper; }
-.tone-moss .eyebrow { @apply text-oak-light; }
+.tone-moss .eyebrow { @apply text-olive; }
 
 /* Shown where a photo hasn't been added yet (see src/components/Img.astro). */
 .img-placeholder {

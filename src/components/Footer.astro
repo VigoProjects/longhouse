@@ -6,19 +6,19 @@ const year = new Date().getFullYear();
 <footer class="bg-moss-950 text-paper/85">
   <div class="container-page grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
     <div class="max-w-sm">
-      <Logo inverted class="text-paper" />
+      <Logo inverted class="!h-16" />
       <p class="mt-5 text-sm leading-relaxed text-paper/70">{site.footerNote}</p>
     </div>
     <div class="text-sm">
-      <p class="eyebrow !text-oak-light mb-4">Visit</p>
+      <p class="eyebrow !text-olive mb-4">Visit</p>
       <address class="not-italic leading-relaxed">
         {site.address.street}<br />{site.address.locality}, {site.address.region}<br />{site.address.postcode}
       </address>
     </div>
     <div class="text-sm">
-      <p class="eyebrow !text-oak-light mb-4">Get in touch</p>
-      <p><a class="hover:text-oak-light" href={`mailto:${site.email}`}>{site.email}</a></p>
-      <p class="mt-1"><a class="hover:text-oak-light" href={telHref}>{site.phone}</a></p>
+      <p class="eyebrow !text-olive mb-4">Get in touch</p>
+      <p><a class="hover:text-olive" href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p class="mt-1"><a class="hover:text-olive" href={telHref}>{site.phone}</a></p>
       <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-paper/60">
         {site.nav.map((l) => <li><a class="hover:text-paper" href={l.href}>{l.label}</a></li>)}
       </ul>

@@ -3,7 +3,7 @@
 const { id, background = "paper", eyebrow, heading, body, items, isPageTitle } = Astro.props;
 const H = isPageTitle ? "h1" : "h2";
 ---
-<section id={id} class:list={[`tone-${background}`, "section scroll-mt-18"]}>
+<section id={id} class:list={[`tone-${background}`, "section scroll-mt-24"]}>
   <div class="container-page grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
     <div class="lg:sticky lg:top-32 lg:self-start">
       {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
@@ -15,12 +15,12 @@ const H = isPageTitle ? "h1" : "h2";
         <li class="border-b border-stone-400/50">
           <details class="group py-6 lg:py-8" open={i === 0}>
             <summary class="flex cursor-pointer list-none items-baseline gap-6">
-              <span class="font-serif text-lg text-oak tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+              <span class="font-serif text-lg text-olive-dark tabular-nums">{String(i + 1).padStart(2, "0")}</span>
               <h3 class="flex-1 text-2xl lg:text-3xl">{s.title}</h3>
               <span aria-hidden="true" class="text-2xl font-light text-muted transition-transform group-open:rotate-45">+</span>
             </summary>
             <ul class="mt-5 grid gap-x-8 gap-y-2 pl-12 text-[0.97rem] text-muted sm:grid-cols-2">
-              {s.items.map((it) => <li class="relative pl-4 before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-2 before:bg-oak">{it}</li>)}
+              {s.items.map((it) => <li class="relative pl-4 before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-2 before:bg-olive-dark">{it}</li>)}
             </ul>
           </details>
         </li>
