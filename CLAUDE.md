@@ -29,7 +29,7 @@ layout changes can be made by describing them in plain English. Read this file b
 ### Page blocks (`type:` in the YAML)
 | type | What it is |
 |---|---|
-| `hero` | Full-bleed photo opener: eyebrow, heading, body, two buttons |
+| `hero` | Opener: eyebrow, heading, body, two buttons, image. `layout: split` (text beside image, default) or `overlay` (text over full-bleed image) |
 | `pageHeader` | Simple page title for inner pages |
 | `services` | Numbered stages, each with a list of what's included (accordion) |
 | `quote` | Large testimonial |

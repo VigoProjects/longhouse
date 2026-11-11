@@ -3,6 +3,7 @@ metaTitle: Longhouse Builders | Conservation & Period Property Builders, Peak Di
 description: Longhouse Builders repair, restore and sympathetically extend period and listed homes across the Peak District, using traditional materials and craft skills.
 blocks:
   - type: hero
+    layout: split
     eyebrow: Sustainable and innovative builders, specialising in period property
     heading: Careful work on old buildings.
     body: We repair, restore and sympathetically extend period and listed homes, using traditional materials and the skills they were built with.

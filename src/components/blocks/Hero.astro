@@ -1,23 +1,46 @@
 ---
+/**
+ * Page opener. Two layouts (set `layout:` in the page YAML):
+ *  - split (default): copy on the paper background, framed image alongside within the page margins
+ *  - overlay: copy over a full-bleed, darkened image
+ */
 import Button from "../Button.astro";
 import Img from "../Img.astro";
-const { eyebrow, heading, body, cta, secondaryCta, image } = Astro.props;
+const { eyebrow, heading, body, cta, secondaryCta, image, layout = "split" } = Astro.props;
 ---
-<section class="relative overflow-hidden bg-moss-950 text-paper">
-  <div class="absolute inset-0">
-    <Img src={image?.src} alt={image?.alt} class="h-full w-full object-cover opacity-55" loading="eager" fetchpriority="high" />
-    <div class="absolute inset-0 bg-gradient-to-r from-moss-950/95 via-moss-950/70 to-moss-950/10"></div>
-    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-moss-950/60 to-transparent"></div>
-  </div>
-  <div class="container-page relative flex min-h-[78svh] flex-col justify-end pb-20 pt-32 lg:pb-28">
-    <div class="max-w-2xl">
-      {eyebrow && <p class="eyebrow !text-olive mb-6">{eyebrow}</p>}
-      <h1 class="text-5xl sm:text-6xl lg:text-[5.25rem]">{heading}</h1>
-      {body && <p class="mt-7 max-w-xl text-lg leading-relaxed text-paper/85">{body}</p>}
-      <div class="mt-10 flex flex-wrap gap-4">
-        {cta && <Button href={cta.href} variant="light">{cta.label}</Button>}
-        {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
+{layout === "overlay" ? (
+  <section class="relative overflow-hidden bg-moss-950 text-paper">
+    <div class="absolute inset-0">
+      <Img src={image?.src} alt={image?.alt} class="h-full w-full object-cover opacity-55" loading="eager" fetchpriority="high" />
+      <div class="absolute inset-0 bg-gradient-to-r from-moss-950/95 via-moss-950/70 to-moss-950/10"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-moss-950/60 to-transparent"></div>
+    </div>
+    <div class="container-page relative flex min-h-[78svh] flex-col justify-end pb-20 pt-32 lg:pb-28">
+      <div class="max-w-2xl">
+        {eyebrow && <p class="eyebrow !text-olive mb-6">{eyebrow}</p>}
+        <h1 class="text-5xl sm:text-6xl lg:text-[5.25rem]">{heading}</h1>
+        {body && <p class="mt-7 max-w-xl text-lg leading-relaxed text-paper/85">{body}</p>}
+        <div class="mt-10 flex flex-wrap gap-4">
+          {cta && <Button href={cta.href} variant="light">{cta.label}</Button>}
+          {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+) : (
+  <section class="bg-paper">
+    <div class="container-page grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16 lg:py-24 xl:gap-24">
+      <div>
+        {eyebrow && <p class="eyebrow mb-6 max-w-md">{eyebrow}</p>}
+        <h1 class="text-5xl text-moss-900 sm:text-6xl xl:text-[4.75rem]">{heading}</h1>
+        <span aria-hidden="true" class="mt-8 block h-px w-24 bg-olive"></span>
+        {body && <p class="mt-8 max-w-lg text-lg leading-relaxed text-muted text-pretty">{body}</p>}
+        <div class="mt-10 flex flex-wrap gap-4">
+          {cta && <Button href={cta.href}>{cta.label}</Button>}
+          {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
+        </div>
+      </div>
+      <Img src={image?.src} alt={image?.alt} class="aspect-[4/3] w-full rounded-sm object-cover lg:aspect-[4/5]" loading="eager" fetchpriority="high" />
+    </div>
+  </section>
+)}
