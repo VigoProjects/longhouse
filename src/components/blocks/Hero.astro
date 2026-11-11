@@ -1,7 +1,7 @@
 ---
 /**
  * Page opener. Two layouts (set `layout:` in the page YAML):
- *  - split (default): copy on the paper background, image alongside, nothing laid over the photo
+ *  - split (default): copy on the paper background, framed image alongside within the page margins
  *  - overlay: copy over a full-bleed, darkened image
  */
 import Button from "../Button.astro";
@@ -28,19 +28,19 @@ const { eyebrow, heading, body, cta, secondaryCta, image, layout = "split" } = A
     </div>
   </section>
 ) : (
-  <section class="bg-paper lg:grid lg:min-h-[calc(100svh-5rem)] lg:grid-cols-2">
-    <div class="flex flex-col justify-center px-5 py-16 sm:px-8 sm:py-20 lg:py-24 lg:pr-16 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))] xl:pr-24">
-      {eyebrow && <p class="eyebrow mb-6 max-w-md">{eyebrow}</p>}
-      <h1 class="text-5xl text-moss-900 sm:text-6xl xl:text-[4.75rem]">{heading}</h1>
-      <span aria-hidden="true" class="mt-8 block h-px w-24 bg-olive"></span>
-      {body && <p class="mt-8 max-w-lg text-lg leading-relaxed text-muted text-pretty">{body}</p>}
-      <div class="mt-10 flex flex-wrap gap-4">
-        {cta && <Button href={cta.href}>{cta.label}</Button>}
-        {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
+  <section class="bg-paper">
+    <div class="container-page grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16 lg:py-24 xl:gap-24">
+      <div>
+        {eyebrow && <p class="eyebrow mb-6 max-w-md">{eyebrow}</p>}
+        <h1 class="text-5xl text-moss-900 sm:text-6xl xl:text-[4.75rem]">{heading}</h1>
+        <span aria-hidden="true" class="mt-8 block h-px w-24 bg-olive"></span>
+        {body && <p class="mt-8 max-w-lg text-lg leading-relaxed text-muted text-pretty">{body}</p>}
+        <div class="mt-10 flex flex-wrap gap-4">
+          {cta && <Button href={cta.href}>{cta.label}</Button>}
+          {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
+        </div>
       </div>
-    </div>
-    <div class="relative px-5 pb-5 sm:px-8 sm:pb-8 lg:p-0">
-      <Img src={image?.src} alt={image?.alt} class="aspect-[4/3] w-full rounded-sm object-cover lg:absolute lg:inset-0 lg:h-full lg:aspect-auto lg:rounded-none" loading="eager" fetchpriority="high" />
+      <Img src={image?.src} alt={image?.alt} class="aspect-[4/3] w-full rounded-sm object-cover lg:aspect-[4/5]" loading="eager" fetchpriority="high" />
     </div>
   </section>
 )}
