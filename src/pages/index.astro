@@ -1,0 +1,10 @@
+---
+import { getEntry } from "astro:content";
+import Base from "../layouts/Base.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
+const page = (await getEntry("pages", "home"))!;
+const d = page.data;
+---
+<Base title={d.title} metaTitle={d.metaTitle} description={d.description} ogImage={d.ogImage} noindex={d.noindex}>
+  <BlockRenderer blocks={d.blocks} />
+</Base>

@@ -1,0 +1,69 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+import { site } from "../lib/site";
+import { business, breadcrumbs as crumbs } from "../lib/schema";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Full <title> override; otherwise "<title> | Longhouse Builders". */
+  metaTitle?: string;
+  ogImage?: string;
+  breadcrumbs?: [string, string][];
+  schema?: object[];
+  noindex?: boolean;
+}
+const { title, description, metaTitle, ogImage = "/assets/og-default.jpg", breadcrumbs, schema = [], noindex = false } = Astro.props;
+const fullTitle = metaTitle ?? `${title} | ${site.name}`;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonical = new URL(path, Astro.site).href;
+const jsonLd = [business(), ...(breadcrumbs?.length ? [crumbs(breadcrumbs)] : []), ...schema];
+const gtm = site.analytics?.gtm;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#1f3127" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {jsonLd.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+    {gtm && (
+      <script is:inline define:vars={{ gtm }}>
+        (() => {
+          let ok = false;
+          try { ok = localStorage.getItem('cookie-accepted') === '1'; } catch (e) {}
+          if (!ok) return;
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+          const s = document.createElement('script');
+          s.async = true; s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtm;
+          document.head.appendChild(s);
+        })();
+      </script>
+    )}
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2">Skip to content</a>
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+    {gtm && <CookieBanner />}
+  </body>
+</html>

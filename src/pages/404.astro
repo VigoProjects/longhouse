@@ -1,0 +1,12 @@
+---
+import Base from "../layouts/Base.astro";
+import Button from "../components/Button.astro";
+---
+<Base title="Page not found" description="The page you were looking for couldn't be found." noindex>
+  <section class="container-page py-32">
+    <p class="eyebrow mb-5">404</p>
+    <h1 class="text-5xl lg:text-7xl">This page has gone the way of the old lime mortar.</h1>
+    <p class="mt-6 max-w-xl text-lg text-muted">The page you were looking for isn't here. Try the homepage, or get in touch.</p>
+    <div class="mt-10 flex gap-4"><Button href="/">Home</Button><Button href="/contact" variant="ghost">Contact</Button></div>
+  </section>
+</Base>

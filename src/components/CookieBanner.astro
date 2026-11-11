@@ -1,0 +1,21 @@
+---
+/** Consent banner, only rendered when a GTM ID is set in site.yaml. GTM loads after "Accept all" (see Base.astro). */
+---
+<div id="cookie-banner" hidden class="fixed inset-x-0 bottom-0 z-50 bg-moss-950 text-paper" role="region" aria-label="Cookie consent">
+  <div class="container-page flex flex-col gap-4 py-4 text-sm lg:flex-row lg:items-center lg:justify-between">
+    <p>We use cookies to understand how the site is used. You can accept all cookies or only those needed for the site to work.</p>
+    <div class="flex gap-3">
+      <button data-choice="1" class="rounded-sm bg-paper px-4 py-2 font-semibold text-moss-950">Accept all</button>
+      <button data-choice="0" class="rounded-sm border border-paper/40 px-4 py-2 font-semibold">Necessary only</button>
+    </div>
+  </div>
+</div>
+<script>
+  const el = document.getElementById("cookie-banner")!;
+  try { el.hidden = !!localStorage.getItem("cookie-accepted"); } catch { el.hidden = false; }
+  el.querySelectorAll<HTMLButtonElement>("button").forEach((b) => b.addEventListener("click", () => {
+    try { localStorage.setItem("cookie-accepted", b.dataset.choice!); } catch {}
+    el.hidden = true;
+    if (b.dataset.choice === "1") location.reload();
+  }));
+</script>

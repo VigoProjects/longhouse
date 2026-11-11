@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import Img from "../Img.astro";
+import Button from "../Button.astro";
+const { id, background = "paper", eyebrow, heading, body, featured, cta, isPageTitle } = Astro.props;
+let projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+if (featured?.length) projects = featured.map((s: string) => {
+  const p = projects.find((x) => x.id === s);
+  if (!p) throw new Error(`projects block: no project called "${s}" in src/content/projects`);
+  return p;
+});
+const H = isPageTitle ? "h1" : "h2";
+---
+<section id={id} class:list={[`tone-${background}`, "section"]}>
+  <div class="container-page">
+    <div class="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
+        <H class="text-4xl lg:text-5xl">{heading}</H>
+        {body && <p class="mt-5 text-muted">{body}</p>}
+      </div>
+      {cta && <Button href={cta.href} variant="ghost" class="self-start lg:self-auto">{cta.label}</Button>}
+    </div>
+    <ul class="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((p, i) => {
+        const Tag = p.data.page ? "a" : "div";
+        return (
+          <li class:list={[i === 0 && projects.length > 3 && "lg:col-span-2 lg:row-span-1"]}>
+            <Tag href={p.data.page ? `/projects/${p.id}` : undefined} class="group block">
+              <div class="overflow-hidden rounded-sm">
+                <Img src={p.data.image?.src} alt={p.data.image?.alt ?? p.data.title}
+                  class:list={["w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]", i === 0 && projects.length > 3 ? "aspect-[16/9] lg:aspect-[2/1]" : "aspect-[4/3]"]} />
+              </div>
+              <div class="mt-4 flex items-baseline justify-between gap-4">
+                <h3 class="text-xl lg:text-2xl">{p.data.title}</h3>
+                {p.data.tags[0] && <span class="shrink-0 text-xs font-semibold uppercase tracking-wider text-oak">{p.data.tags[0]}</span>}
+              </div>
+              {(p.data.summary || p.data.location) && <p class="mt-1 text-sm text-muted">{[p.data.location, p.data.summary].filter(Boolean).join(" · ")}</p>}
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+# Site-wide facts: business details, navigation, footer. Used by the header, footer,
+# contact blocks and Google structured data (src/lib/schema.ts).
+name: Longhouse Builders
+legalName: Longhouse Builders
+tagline: Careful work on old buildings in the Peak District — repair, restoration and sympathetic extensions to period and listed homes.
+email: hello@longhousebuilders.co.uk
+phone: "07980 865007"
+address:
+  street: Jumble Farm, Kinder Road
+  locality: Hayfield
+  region: High Peak, Derbyshire
+  postcode: SK22 2HS
+  country: GB
+# Service area, used in structured data. Add the towns/counties Longhouse actually covers.
+areaServed: [Peak District, High Peak, Derbyshire]
+nav:
+  - { label: Services, href: "/#services" }
+  - { label: Projects, href: "/projects" }
+  - { label: About, href: "/#about" }
+  - { label: Contact, href: "/contact" }
+cta: { label: Start your project, href: "/contact" }
+footerNote: A family business repairing, restoring and extending period and listed homes in the Peak District.
+analytics:
+  # Google Tag Manager container ID (e.g. GTM-XXXXXXX). Leave empty for none.
+  # When set, a cookie banner appears and GTM only loads after "Accept all".
+  gtm: ""

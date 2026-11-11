@@ -1,0 +1,23 @@
+---
+import Button from "../Button.astro";
+import Img from "../Img.astro";
+const { eyebrow, heading, body, cta, secondaryCta, image } = Astro.props;
+---
+<section class="relative overflow-hidden bg-moss-950 text-paper">
+  <div class="absolute inset-0">
+    <Img src={image?.src} alt={image?.alt} class="h-full w-full object-cover opacity-55" loading="eager" fetchpriority="high" />
+    <div class="absolute inset-0 bg-gradient-to-r from-moss-950/95 via-moss-950/70 to-moss-950/10"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-moss-950/60 to-transparent"></div>
+  </div>
+  <div class="container-page relative flex min-h-[78svh] flex-col justify-end pb-20 pt-32 lg:pb-28">
+    <div class="max-w-2xl">
+      {eyebrow && <p class="eyebrow !text-oak-light mb-6">{eyebrow}</p>}
+      <h1 class="text-5xl sm:text-6xl lg:text-[5.25rem]">{heading}</h1>
+      {body && <p class="mt-7 max-w-xl text-lg leading-relaxed text-paper/85">{body}</p>}
+      <div class="mt-10 flex flex-wrap gap-4">
+        {cta && <Button href={cta.href} variant="light">{cta.label}</Button>}
+        {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+# DRAFT — check with Longhouse before launch (especially retention and who handles enquiries).
+title: Privacy
+description: How Longhouse Builders collects, uses and protects the personal information you share when you contact us through this website.
+blocks:
+  - type: pageHeader
+    eyebrow: Privacy
+    heading: Your information
+  - type: prose
+    body: |
+      This notice explains how Longhouse Builders ("we") uses personal information collected through this website.
+
+      ## What we collect
+      When you send an enquiry we collect the details you give us: your name, email address, phone number, the property postcode and a description of your project.
+
+      ## How we use it
+      We use these details only to reply to your enquiry and, if you go ahead, to arrange a consultation and quote. Our lawful basis is taking steps at your request before entering into a contract. We don't sell your information or use it for marketing without your consent.
+
+      ## Who handles it
+      This website is hosted by Vercel and enquiry emails are delivered by Resend. Both act on our behalf and only process your details to provide those services.
+
+      ## Cookies
+      The site uses privacy-friendly, cookie-free visitor statistics. If we add any other analytics in future, they will only run after you accept them in the cookie banner.
+
+      ## How long we keep it
+      We keep enquiries for as long as we need them to deal with your project, then delete them.
+
+      ## Your rights
+      You can ask to see, correct or delete the information we hold about you by emailing [hello@longhousebuilders.co.uk](mailto:hello@longhousebuilders.co.uk). If you're unhappy with how we've handled your information you can complain to the [Information Commissioner's Office](https://ico.org.uk/make-a-complaint/).

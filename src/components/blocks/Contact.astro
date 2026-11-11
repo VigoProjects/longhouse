@@ -1,0 +1,80 @@
+---
+/** Contact details + enquiry form. Posts to /api/contact (Resend). */
+import { site, telHref } from "../../lib/site";
+const { id, background = "paper", eyebrow, heading, body, isPageTitle } = Astro.props;
+const H = isPageTitle ? "h1" : "h2";
+const recaptchaKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
+const field = "mt-2 w-full rounded-sm border border-stone-400/70 bg-paper px-4 py-3 text-base placeholder:text-stone-400 focus:border-moss-800 focus:outline-none focus:ring-1 focus:ring-moss-800";
+const label = "text-sm font-semibold";
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.address.street}, ${site.address.locality} ${site.address.postcode}`)}`;
+---
+<section id={id} class:list={[`tone-${background}`, "section scroll-mt-18"]}>
+  <div class="container-page grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+    <div>
+      {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
+      <H class:list={[isPageTitle ? "text-5xl lg:text-7xl" : "text-4xl lg:text-5xl"]}>{heading}</H>
+      {body && <p class="mt-6 max-w-md text-lg text-muted">{body}</p>}
+      <dl class="mt-10 space-y-6 border-t border-stone-400/50 pt-8 text-[0.97rem]">
+        <div><dt class="eyebrow mb-1">Telephone</dt><dd><a class="font-serif text-2xl hover:text-oak" href={telHref}>{site.phone}</a></dd></div>
+        <div><dt class="eyebrow mb-1">Email</dt><dd><a class="font-serif text-2xl hover:text-oak break-all" href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+        <div><dt class="eyebrow mb-1">Yard</dt><dd class="text-muted">{site.address.street}, {site.address.locality}, {site.address.region}, {site.address.postcode} · <a class="underline underline-offset-4 hover:text-oak" href={mapUrl} rel="noopener" target="_blank">Map</a></dd></div>
+      </dl>
+    </div>
+
+    <form id="enquiry" action="/api/contact" method="post" class="grid gap-5 rounded-sm bg-paper p-6 shadow-[0_1px_0_rgb(0_0_0/0.04),0_20px_50px_-25px_rgb(31_49_39/0.35)] sm:grid-cols-2 sm:p-10" novalidate>
+      <label class="sm:col-span-1"><span class={label}>Your name *</span><input class={field} name="name" autocomplete="name" required /></label>
+      <label class="sm:col-span-1"><span class={label}>Email *</span><input class={field} type="email" name="email" autocomplete="email" required /></label>
+      <label class="sm:col-span-1"><span class={label}>Phone</span><input class={field} type="tel" name="phone" autocomplete="tel" /></label>
+      <label class="sm:col-span-1"><span class={label}>Property postcode</span><input class={field} name="postcode" autocomplete="postal-code" /></label>
+      <label class="sm:col-span-2"><span class={label}>Is the building listed?</span>
+        <select class={field} name="listed">
+          <option value="">Choose one</option>
+          <option>Not listed</option><option>Grade II</option><option>Grade II*</option><option>Grade I</option><option>In a conservation area</option><option>Not sure</option>
+        </select>
+      </label>
+      <label class="sm:col-span-2"><span class={label}>About your project *</span><textarea class={field} name="message" rows="5" required placeholder="What's the building, and what would you like to do?"></textarea></label>
+      <label class="hidden" aria-hidden="true">Leave blank<input name="honeypot" tabindex="-1" autocomplete="off" /></label>
+      <input type="hidden" name="recaptcha_token" />
+      <div class="sm:col-span-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-xs text-muted">We'll only use your details to reply to you. <a href="/privacy" class="underline underline-offset-2">Privacy</a></p>
+        <button type="submit" class="rounded-sm bg-moss-900 px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-moss-800 disabled:opacity-60">Send enquiry →</button>
+      </div>
+      <p data-status role="status" aria-live="polite" class="sm:col-span-2 text-sm empty:hidden"></p>
+    </form>
+  </div>
+</section>
+
+<script define:vars={{ recaptchaKey }}>
+  const form = document.getElementById("enquiry");
+  const status = form.querySelector("[data-status]");
+  const btn = form.querySelector("button[type=submit]");
+  let loaded = false;
+  // reCAPTCHA only loads once someone starts filling in the form.
+  form.addEventListener("focusin", () => {
+    if (loaded || !recaptchaKey) return;
+    loaded = true;
+    const s = document.createElement("script");
+    s.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaKey}`;
+    document.head.appendChild(s);
+  });
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.disabled = true; status.textContent = "Sending…"; status.className = "sm:col-span-2 text-sm text-muted";
+    try {
+      if (recaptchaKey && window.grecaptcha) {
+        await new Promise((r) => window.grecaptcha.ready(r));
+        form.recaptcha_token.value = await window.grecaptcha.execute(recaptchaKey, { action: "contact" });
+      }
+      const res = await fetch(form.action, { method: "POST", body: new FormData(form) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Sorry, something went wrong.");
+      form.reset();
+      status.textContent = "Thank you — we've got your message and will be in touch shortly.";
+      status.className = "sm:col-span-2 text-sm font-semibold text-moss-800";
+    } catch (err) {
+      status.textContent = `${err.message} You can also email us directly.`;
+      status.className = "sm:col-span-2 text-sm font-semibold text-red-700";
+    } finally { btn.disabled = false; }
+  });
+</script>

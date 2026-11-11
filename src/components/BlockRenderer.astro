@@ -1,0 +1,25 @@
+---
+/** Renders a page's `blocks:` list. Register new block types in `components` below. */
+import type { Block } from "../content/blocks";
+import Hero from "./blocks/Hero.astro";
+import PageHeader from "./blocks/PageHeader.astro";
+import Services from "./blocks/Services.astro";
+import Quote from "./blocks/Quote.astro";
+import Projects from "./blocks/Projects.astro";
+import Logos from "./blocks/Logos.astro";
+import Prose from "./blocks/Prose.astro";
+import Contact from "./blocks/Contact.astro";
+import Cta from "./blocks/Cta.astro";
+
+const components = {
+  hero: Hero, pageHeader: PageHeader, services: Services, quote: Quote, projects: Projects,
+  logos: Logos, prose: Prose, contact: Contact, cta: Cta,
+} as const;
+
+interface Props { blocks: Block[] }
+const { blocks } = Astro.props;
+---
+{blocks.map((b, i) => {
+  const C = components[b.type] as any;
+  return <C {...b} isPageTitle={i === 0} />;
+})}

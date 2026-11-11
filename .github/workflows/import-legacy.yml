@@ -1,0 +1,62 @@
+# One-off import of the current Squarespace site (conservationbuilder.com).
+# Runs on GitHub's servers (the AI workspace can't reach Squarespace) and commits:
+#   legacy/                 — a full mirror (HTML, CSS, every image in full size, page JSON) for reference
+#   public/assets/…         — the known images in scripts/legacy-assets.txt, at the paths the new site uses
+# Safe to delete this workflow and legacy/ once the new site is live.
+name: Import legacy site
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/import-legacy.yml"
+      - "scripts/legacy-assets.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Mirror conservationbuilder.com
+        run: |
+          UA="LonghouseSiteImport/1.0"
+          rm -rf legacy && mkdir -p legacy && cd legacy
+          wget --mirror --page-requisites --adjust-extension --span-hosts \
+               --domains www.conservationbuilder.com,images.squarespace-cdn.com,static1.squarespace.com,assets.squarespace.com \
+               --wait=0.5 --random-wait --tries=3 --timeout=30 -e robots=off --user-agent="$UA" \
+               https://www.conservationbuilder.com/ https://www.conservationbuilder.com/contact || true
+          # Squarespace page data (text, image URLs, style settings)
+          mkdir -p json
+          for p in "" contact; do
+            curl -sL -A "$UA" "https://www.conservationbuilder.com/${p}?format=json-pretty" -o "json/${p:-home}.json" || true
+          done
+          # Squarespace lazy-loads images via data-src, which wget doesn't follow: grab every one at full size
+          mkdir -p images
+          grep -rhoE 'https://images\.squarespace-cdn\.com/content/[^"'"'"' )?]+' . | sort -u > ../image-urls.txt || true
+          while read -r u; do
+            f="images/$(basename "$u" | sed 's/%[0-9A-Fa-f][0-9A-Fa-f]/_/g; s/+/_/g')"
+            [ -f "$f" ] || curl -sfL -A "$UA" "${u}?format=2500w" -o "$f" || true
+          done < ../image-urls.txt
+          cd ..
+          find legacy -type f | sed 's#^legacy/##' | sort > legacy/MANIFEST.txt
+          echo "Files: $(wc -l < legacy/MANIFEST.txt)"; du -sh legacy
+
+      - name: Copy known images into public/assets
+        run: |
+          grep -vE '^\s*(#|$)' scripts/legacy-assets.txt | while read -r url dest; do
+            mkdir -p "public/$(dirname "$dest")"
+            curl -sfL -A "LonghouseSiteImport/1.0" "$url" -o "public/$dest" && echo "ok  $dest" || echo "FAIL $dest"
+          done
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "legacy-import[bot]"
+          git config user.email "legacy-import@users.noreply.github.com"
+          git add legacy public/assets
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Import legacy Squarespace snapshot and images"
+          git push

@@ -1,0 +1,35 @@
+---
+/** Project write-ups: src/content/projects/<slug>.md with `page: true` → /projects/<slug> */
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Img from "../../components/Img.astro";
+import Cta from "../../components/blocks/Cta.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects", (p) => p.data.page);
+  return projects.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props as { entry: CollectionEntry<"projects"> };
+const d = entry.data;
+const { Content } = await render(entry);
+---
+<Base title={d.title} description={d.description ?? d.summary ?? `${d.title} by Longhouse Builders, Peak District.`}
+  ogImage={d.image?.src} breadcrumbs={[["Projects", "/projects"], [d.title, `/projects/${entry.id}`]]}>
+  <article>
+    <header class="container-page pt-20 lg:pt-28">
+      <p class="eyebrow mb-5"><a href="/projects" class="hover:underline">Projects</a>{d.tags.length > 0 && ` · ${d.tags.join(" · ")}`}</p>
+      <h1 class="max-w-4xl text-5xl lg:text-7xl">{d.title}</h1>
+      {(d.summary || d.location) && <p class="mt-6 max-w-2xl text-lg text-muted">{[d.location, d.summary].filter(Boolean).join(" · ")}</p>}
+    </header>
+    {d.image && <div class="container-page mt-12"><Img src={d.image.src} alt={d.image.alt} class="aspect-[16/9] w-full rounded-sm object-cover" loading="eager" /></div>}
+    <div class="container-page py-16">
+      <div class="prose prose-lg max-w-3xl prose-headings:font-serif prose-headings:font-normal prose-a:text-oak"><Content /></div>
+    </div>
+    {d.gallery.length > 0 && (
+      <div class="container-page grid gap-6 pb-20 sm:grid-cols-2">
+        {d.gallery.map((g) => <figure><Img src={g.src} alt={g.alt} class="aspect-[4/3] w-full rounded-sm object-cover" />{g.caption && <figcaption class="mt-2 text-sm text-muted">{g.caption}</figcaption>}</figure>)}
+      </div>
+    )}
+  </article>
+  <Cta heading="Got a period property project in mind?" body="We offer a complimentary consultation and site visit." cta={{ label: "Start your project", href: "/contact" }} />
+</Base>

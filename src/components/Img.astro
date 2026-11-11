@@ -1,0 +1,15 @@
+---
+/**
+ * Image from /public. If the file isn't there yet, renders a stone-textured placeholder
+ * instead of a broken image, so pages can be laid out before photos arrive.
+ */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
+interface Props { src?: string; alt?: string; class?: string; loading?: "lazy" | "eager"; fetchpriority?: "high" | "auto" }
+const { src, alt = "", class: cls = "", loading = "lazy", fetchpriority } = Astro.props;
+const exists = !!src && (/^https?:/.test(src) || existsSync(join(process.cwd(), "public", decodeURIComponent(src))));
+---
+{exists
+  ? <img src={src} alt={alt} class={cls} loading={loading} fetchpriority={fetchpriority} />
+  : <div class:list={["img-placeholder", cls]} role="img" aria-label={alt || "Photo coming soon"}></div>}

@@ -1,0 +1,9 @@
+# Known images on the live Squarespace site → where the new site expects them.
+# Format: <url> <path under public/>. The import workflow downloads these.
+https://images.squarespace-cdn.com/content/v1/692592af44160231ceb31443/f5dc7f6f-8a4a-499d-9231-693467e9af06/paths+cmyk%404x.png?format=1500w assets/logo.png
+https://images.squarespace-cdn.com/content/v1/692592af44160231ceb31443/9f2b9b29-33de-4063-abdd-bdb5996e70b4/paths+inverted+dark+green%404x.png?format=1500w assets/logo-inverted.png
+https://images.squarespace-cdn.com/content/v1/692592af44160231ceb31443/fc78271c-2a65-4909-b2a6-c10d07353f8e/Gemini_Generated_Image_j7zm7yj7zm7yj7zm.png?format=2500w assets/hero.png
+https://images.squarespace-cdn.com/content/v1/692592af44160231ceb31443/2230dd65-a1d2-4a2f-9cae-d22a58ae3770/WhatsApp+Image+2025-11-27+at+20.02.41+%282%29.jpeg?format=1500w assets/family.jpeg
+https://images.squarespace-cdn.com/content/v1/692592af44160231ceb31443/142034a7-edfe-40a3-945a-60db3d757c17/riba-logo-png-transparent.png?format=750w assets/logos/riba.png
+https://images.squarespace-cdn.com/content/v1/692592af44160231ceb31443/ccdee507-94b9-4b7e-8842-a83469bbd24b/EH_Logotype_RGB.png?format=750w assets/logos/english-heritage.png
+https://images.squarespace-cdn.com/content/v1/692592af44160231ceb31443/62c016ab-51cb-4f85-8e90-b121e547ee9c/logo-national-trust-300x89.png assets/logos/national-trust.png

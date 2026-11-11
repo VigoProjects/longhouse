@@ -1,0 +1,17 @@
+title: Projects
+metaTitle: Projects | Longhouse Builders, Peak District
+description: Recent conservation and period property projects by Longhouse Builders — stone extensions, listed building renovations and barn conversions in the Peak District.
+blocks:
+  - type: pageHeader
+    eyebrow: Projects
+    heading: Recent work on old buildings
+    body: A selection of the extensions, restorations and listed building renovations we've completed in and around the Peak District.
+
+  - type: projects
+    heading: All projects
+
+  - type: cta
+    background: moss
+    heading: Got a period property project in mind?
+    body: We offer a complimentary consultation and site visit.
+    cta: { label: Start your project, href: /contact }

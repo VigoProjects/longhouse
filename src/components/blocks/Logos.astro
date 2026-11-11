@@ -1,0 +1,14 @@
+---
+import Img from "../Img.astro";
+const { id, background = "stone", heading, items } = Astro.props;
+---
+<section id={id} class:list={[`tone-${background}`, "py-14"]}>
+  <div class="container-page">
+    {heading && <p class="eyebrow mb-8 text-center">{heading}</p>}
+    <ul class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
+      {items.map((l: { src: string; alt: string }) => (
+        <li><Img src={l.src} alt={l.alt} class="h-12 w-36 object-contain grayscale opacity-75 mix-blend-multiply" /></li>
+      ))}
+    </ul>
+  </div>
+</section>

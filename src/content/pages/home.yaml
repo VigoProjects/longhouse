@@ -1,0 +1,94 @@
+title: Home
+metaTitle: Longhouse Builders | Conservation & Period Property Builders, Peak District
+description: Longhouse Builders repair, restore and sympathetically extend period and listed homes across the Peak District, using traditional materials and craft skills.
+blocks:
+  - type: hero
+    eyebrow: Sustainable and innovative builders, specialising in period property
+    heading: Careful work on old buildings.
+    body: We repair, restore and sympathetically extend period and listed homes, using traditional materials and the skills they were built with.
+    cta: { label: Start your project, href: /contact }
+    secondaryCta: { label: See recent projects, href: /projects }
+    image: { src: /assets/hero.png, alt: "Stone-built period home in the Peak District" }
+
+  - type: services
+    id: services
+    eyebrow: What we do
+    heading: 35 years of building in the heart of the Peak District
+    body: From the first site visit to the final snagging list, we look after every stage of the work.
+    items:
+      - title: Design & planning
+        items:
+          - Initial consultation and site survey
+          - Early concepts and price estimates
+          - Planning, architectural, structural and technical drawings
+          - Building control and permit applications
+          - Materials sourcing and quantity surveying
+      - title: Preparation & groundworks
+        items:
+          - Site clearance
+          - Soil survey
+          - Underpinning
+          - Deep excavation
+          - Foundations and oversite
+          - Drainage and services
+          - Sewer build-over
+          - Landscaping
+      - title: Structure & weatherproofing
+        items:
+          - Brickwork
+          - Master stone masonry
+          - Structural steel and concrete works
+          - Glazing and security
+          - Timber framing
+          - Master joinery
+          - Heritage roofing
+          - First-fix electrical, gas and plumbing
+      - title: Internal works & finishing
+        items:
+          - Second-fix electrical, gas and plumbing
+          - Master joinery — wainscoting, architraves, staircases and fittings
+          - Fit-out of bathrooms, kitchens and specialist hobby rooms
+          - Heating, home automation and technology commissioning
+          - Floor finishes, heritage and modern
+          - Renewable energy consulting
+      - title: Completion & handover
+        items:
+          - Detailed snagging report
+          - Building control completion
+          - Warranty
+          - Aftercare and maintenance advice
+
+  - type: quote
+    background: moss
+    quote: A truly ace job by Will and the team. Builders with this level of attention to detail are few and far between.
+    name: Michael Hunter
+    context: Listed cottage renovation
+
+  - type: projects
+    eyebrow: Recent projects
+    heading: Stone, timber and lime — done properly
+    cta: { label: All projects, href: /projects }
+
+  - type: logos
+    background: stone
+    items:
+      - { src: /assets/logos/riba.png, alt: RIBA }
+      - { src: /assets/logos/english-heritage.png, alt: English Heritage }
+      - { src: /assets/logos/national-trust.png, alt: National Trust }
+
+  - type: prose
+    id: about
+    eyebrow: About us
+    heading: A family business
+    body: |
+      A father and son team with over 70 years of experience between them. We have a love of heritage and preservation, and specialise in combining environmental and sustainable materials with traditional, time-honoured craftsmanship.
+
+      We care deeply about the work we do, and enjoy nothing more than seeing a project being loved and lived in for years to come.
+    image: { src: /assets/family.jpeg, alt: "The Longhouse Builders father and son team" }
+
+  - type: contact
+    id: contact
+    background: stone
+    eyebrow: Contact us
+    heading: Tell us about your building
+    body: For a complimentary consultation and site visit, drop us a line or use the form, briefly describing your upcoming project. We look forward to hearing from you.

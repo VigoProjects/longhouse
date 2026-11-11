@@ -1,0 +1,33 @@
+---
+import Logo from "./Logo.astro";
+import { site, telHref } from "../lib/site";
+const year = new Date().getFullYear();
+---
+<footer class="bg-moss-950 text-paper/85">
+  <div class="container-page grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="max-w-sm">
+      <Logo inverted class="text-paper" />
+      <p class="mt-5 text-sm leading-relaxed text-paper/70">{site.footerNote}</p>
+    </div>
+    <div class="text-sm">
+      <p class="eyebrow !text-oak-light mb-4">Visit</p>
+      <address class="not-italic leading-relaxed">
+        {site.address.street}<br />{site.address.locality}, {site.address.region}<br />{site.address.postcode}
+      </address>
+    </div>
+    <div class="text-sm">
+      <p class="eyebrow !text-oak-light mb-4">Get in touch</p>
+      <p><a class="hover:text-oak-light" href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p class="mt-1"><a class="hover:text-oak-light" href={telHref}>{site.phone}</a></p>
+      <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-paper/60">
+        {site.nav.map((l) => <li><a class="hover:text-paper" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-paper/10">
+    <div class="container-page flex flex-col gap-2 py-6 text-xs text-paper/50 sm:flex-row sm:justify-between">
+      <p>© {year} {site.legalName}. All rights reserved.</p>
+      <p><a href="/privacy" class="hover:text-paper">Privacy</a></p>
+    </div>
+  </div>
+</footer>

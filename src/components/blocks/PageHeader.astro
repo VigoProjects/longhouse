@@ -1,0 +1,12 @@
+---
+const { background = "paper", eyebrow, heading, body } = Astro.props;
+---
+<section class:list={[`tone-${background}`, "pt-20 pb-4 lg:pt-28"]}>
+  <div class="container-page">
+    <div class="max-w-4xl">
+      {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
+      <h1 class="text-5xl lg:text-7xl">{heading}</h1>
+      {body && <p class="mt-6 max-w-2xl text-lg text-muted">{body}</p>}
+    </div>
+  </div>
+</section>

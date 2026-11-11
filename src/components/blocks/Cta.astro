@@ -1,0 +1,13 @@
+---
+import Button from "../Button.astro";
+const { id, background = "moss", heading, body, cta } = Astro.props;
+---
+<section id={id} class:list={[`tone-${background}`, "py-20"]}>
+  <div class="container-page flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+    <div class="max-w-2xl">
+      <h2 class="text-4xl lg:text-5xl">{heading}</h2>
+      {body && <p class="mt-4 opacity-80">{body}</p>}
+    </div>
+    <Button href={cta.href} variant={background === "moss" ? "light" : "primary"}>{cta.label}</Button>
+  </div>
+</section>
