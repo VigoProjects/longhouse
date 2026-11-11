@@ -8,16 +8,16 @@ const field = "mt-2 w-full rounded-sm border border-stone-400/70 bg-paper px-4 p
 const label = "text-sm font-semibold";
 const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.address.street}, ${site.address.locality} ${site.address.postcode}`)}`;
 ---
-<section id={id} class:list={[`tone-${background}`, "section scroll-mt-18"]}>
+<section id={id} class:list={[`tone-${background}`, "section scroll-mt-24"]}>
   <div class="container-page grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
     <div>
       {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
       <H class:list={[isPageTitle ? "text-5xl lg:text-7xl" : "text-4xl lg:text-5xl"]}>{heading}</H>
       {body && <p class="mt-6 max-w-md text-lg text-muted">{body}</p>}
       <dl class="mt-10 space-y-6 border-t border-stone-400/50 pt-8 text-[0.97rem]">
-        <div><dt class="eyebrow mb-1">Telephone</dt><dd><a class="font-serif text-2xl hover:text-oak" href={telHref}>{site.phone}</a></dd></div>
-        <div><dt class="eyebrow mb-1">Email</dt><dd><a class="font-serif text-2xl hover:text-oak break-all" href={`mailto:${site.email}`}>{site.email}</a></dd></div>
-        <div><dt class="eyebrow mb-1">Yard</dt><dd class="text-muted">{site.address.street}, {site.address.locality}, {site.address.region}, {site.address.postcode} · <a class="underline underline-offset-4 hover:text-oak" href={mapUrl} rel="noopener" target="_blank">Map</a></dd></div>
+        <div><dt class="eyebrow mb-1">Telephone</dt><dd><a class="font-serif text-2xl hover:text-olive-dark" href={telHref}>{site.phone}</a></dd></div>
+        <div><dt class="eyebrow mb-1">Email</dt><dd><a class="font-serif text-2xl hover:text-olive-dark break-all" href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+        <div><dt class="eyebrow mb-1">Yard</dt><dd class="text-muted">{site.address.street}, {site.address.locality}, {site.address.region}, {site.address.postcode} · <a class="underline underline-offset-4 hover:text-olive-dark" href={mapUrl} rel="noopener" target="_blank">Map</a></dd></div>
       </dl>
     </div>
 

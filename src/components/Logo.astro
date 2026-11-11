@@ -1,14 +1,14 @@
 ---
-/** Logo from /public/assets (logo.png / logo-inverted.png). Falls back to a wordmark until the files are added. */
+/** Logo from /public/assets: logo-green.png on light backgrounds, logo-olive.png on dark. */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { site } from "../lib/site";
 
 interface Props { inverted?: boolean; class?: string }
 const { inverted = false, class: cls = "" } = Astro.props;
-const file = inverted ? "/assets/logo-inverted.png" : "/assets/logo.png";
+const file = inverted ? "/assets/logo-olive.png" : "/assets/logo-green.png";
 const has = existsSync(join(process.cwd(), "public", file));
 ---
 {has
-  ? <img src={file} alt={site.name} class:list={["h-10 w-auto", cls]} loading="eager" />
+  ? <img src={file} alt={site.name} class:list={["h-14 w-auto", cls]} loading="eager" />
   : <span class:list={["font-serif text-2xl leading-none tracking-tight", cls]}>Longhouse<span class="block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.32em] opacity-70 mt-1">Builders</span></span>}

@@ -8,7 +8,7 @@ blocks:
     body: We repair, restore and sympathetically extend period and listed homes, using traditional materials and the skills they were built with.
     cta: { label: Start your project, href: /contact }
     secondaryCta: { label: See recent projects, href: /projects }
-    image: { src: /assets/hero.png, alt: "Stone-built period home in the Peak District" }
+    image: { src: /assets/hero.webp, alt: "Stone-built period home in the Peak District" }
 
   - type: services
     id: services
@@ -84,7 +84,7 @@ blocks:
       A father and son team with over 70 years of experience between them. We have a love of heritage and preservation, and specialise in combining environmental and sustainable materials with traditional, time-honoured craftsmanship.
 
       We care deeply about the work we do, and enjoy nothing more than seeing a project being loved and lived in for years to come.
-    image: { src: /assets/family.jpeg, alt: "The Longhouse Builders father and son team" }
+    image: { src: /assets/family.webp, alt: "The Longhouse Builders father and son team" }
 
   - type: contact
     id: contact

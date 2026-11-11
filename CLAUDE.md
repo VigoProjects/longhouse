@@ -7,7 +7,8 @@ layout changes can be made by describing them in plain English. Read this file b
 ## Stack
 - **Astro** (static pages + one serverless function for the contact form), hosted on **Vercel**.
 - **Tailwind CSS v4**. Design tokens (colours, fonts) live in `src/styles/global.css` (`@theme`).
-- Fonts are self-hosted via Fontsource (Newsreader for headings, Public Sans for body).
+- Brand: deep green `#0a2c27` + olive `#aeac4f` (from the logo). Fonts as on the old site, self-hosted via
+  Fontsource: **Ovo** (headings) and **Almarai** (body).
 - No client-side framework; the few interactions (mobile menu, service accordions) use native `<details>`.
 - All content is **files in this repo** — no database, no CMS login.
 - Every push to a branch gets a Vercel **preview URL**. `main` is **production**.
@@ -70,6 +71,6 @@ plus invisible reCAPTCHA v3 when `PUBLIC_RECAPTCHA_SITE_KEY` + `RECAPTCHA_SECRET
 
 ## Housekeeping
 - `.github/workflows/import-legacy.yml` mirrors the old Squarespace site into `legacy/` and copies the
-  images in `scripts/legacy-assets.txt` into `public/assets/`. Run it from the Actions tab (or it runs when
-  either file changes). Delete it and `legacy/` once the new site is live.
+  images in `scripts/legacy-assets.txt` into `public/assets/`. It already ran (Nov 2026); it's
+  manual-only now (Actions tab). Delete it and `legacy/` once the new site is live.
 - Domain: the canonical domain is `www.conservationbuilder.com`. Non-production hosts send `noindex`.
