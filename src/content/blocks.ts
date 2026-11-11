@@ -29,6 +29,8 @@ export const hero = z.object({
   cta: link.optional(),
   secondaryCta: link.optional(),
   image: image.optional(),
+  /** `split`: text on a plain background beside the image. `overlay`: text over a full-bleed image. */
+  layout: z.enum(["split", "overlay"]).default("split"),
 });
 
 export const pageHeader = z.object({
